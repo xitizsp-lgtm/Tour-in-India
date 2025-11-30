@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+  <title>Experiment</title>
+</head>
+<body>
+  <canvas id="myCanvas" width="300" height="150">
+    <script>
+      var canvas = document.getElementById('myCanvas')
+      var ctx = canvas.getContext('2d')
+      // Draw a red rectangle with a black border
+      ctx.fillStyle = 'blue'
+      ctx.fillRect(100, 100, 400, 200)
+      ctx.strokeStyle = 'black'
+      ctx.strokeRect(100, 100, 400, 200)
+      // Draw a blue text
+      ctx.fillStyle = 'blue'
+      ctx.font = '30px Arial'
+      ctx.fillText('Hello', 80, 120)
+    </script>
+  </canvas>
+</body>

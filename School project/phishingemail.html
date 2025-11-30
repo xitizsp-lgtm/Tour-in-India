@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <title>Phishing Email Detective</title>
+
+  <style>
+
+    body {
+
+      font-family: Arial, sans-serif;
+
+      background-color: #eef2f5;
+
+      margin: 0;
+
+      padding: 20px;
+
+      text-align: center;
+
+    }
+
+
+
+    h1 {
+
+      background-color: #2c3e50;
+
+      color: white;
+
+      padding: 20px;
+
+      margin: 0 -20px 30px -20px;
+
+    }
+
+
+
+    .mission {
+
+      background: white;
+
+      padding: 20px;
+
+      max-width: 600px;
+
+      margin: auto;
+
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+      border-left: 5px solid #e74c3c;
+
+    }
+
+
+
+    .question {
+
+      margin-top: 20px;
+
+    }
+
+
+
+    button {
+
+      margin-top: 15px;
+
+      padding: 10px 20px;
+
+      background-color: #27ae60;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    button:hover {
+
+      background-color: #219150;
+
+    }
+
+
+
+    #result, #score {
+
+      font-weight: bold;
+
+      margin-top: 20px;
+
+    }
+
+
+
+    .email-box {
+
+      background-color: #f9f9f9;
+
+      text-align: left;
+
+      padding: 10px;
+
+      margin: 10px 0;
+
+      border: 1px solid #ccc;
+
+    }
+
+
+
+    #progress-bar {
+
+      background: #ddd;
+
+      margin-top: 20px;
+
+      border-radius: 5px;
+
+    }
+
+
+
+    #progress {
+
+      background: #27ae60;
+
+      height: 10px;
+
+      width: 0%;
+
+      border-radius: 5px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+    
+  <form action="schoolproject.html"><button type="submit"  >Home</button></form>
+
+  <h1>🕵 Phishing Email Detective</h1>
+
+  <div class="mission" id="game"></div>
+
+  <p id="result"></p>
+
+  <p id="score"></p>
+
+
+
+  <script>
+
+    const questions = [
+
+      {
+
+        email: `
+
+        <p><strong>From:</strong> support@b4nk-alert.com</p>
+
+        <p><strong>Subject:</strong> Urgent! Verify Your Account</p>
+
+        <p>We noticed suspicious activity. <a href="#">Click here</a> or your account will be locked.</p>`,
+
+        options: [
+
+          "The email says 'Thank you'",
+
+          "The sender email looks suspicious",
+
+          "It’s written in English"
+
+        ],
+
+        correct: 1
+
+      },
+
+      {
+
+        email: `
+
+        <p><strong>From:</strong> hr@fakemail-job.com</p>
+
+        <p><strong>Subject:</strong> You’ve been hired!</p>
+
+        <p>We’re offering you a remote job. Just send your ID proof and bank details.</p>`,
+
+        options: [
+
+          "They offered a job remotely",
+
+          "Asking for personal and bank info via email",
+
+          "It’s a congratulatory message"
+
+        ],
+
+        correct: 1
+
+      },
+
+      {
+
+        email: `
+
+        <p><strong>From:</strong> admin@netflix-support.biz</p>
+
+        <p><strong>Subject:</strong> Payment failed</p>
+
+        <p>Please update your billing details at <a href="#">Netflix-support.biz</a></p>`,
+
+        options: [
+
+          "The link doesn’t look like the real Netflix website",
+
+          "It mentions payment",
+
+          "It uses the word 'update'"
+
+        ],
+
+        correct: 0
+
+      }
+
+    ];
+
+
+
+    let current = 0;
+
+    let score = 0;
+
+    let timer;
+
+    let timeLeft = 15;
+
+
+
+    function loadQuestion() {
+
+      clearInterval(timer);
+
+      timeLeft = 15;
+
+
+
+      const q = questions[current];
+
+      const container = document.getElementById("game");
+
+      const result = document.getElementById("result");
+
+      result.innerHTML = "";
+
+
+
+      container.innerHTML = `
+
+        <h2>🔍 Case ${current + 1} of ${questions.length}</h2>
+
+        <div class="email-box">${q.email}</div>
+
+        <div class="question">
+
+          <p><strong>What is the most suspicious part of this email?</strong></p>
+
+          ${q.options.map((opt, I) => `
+
+            <label><input type="radio" name="answer" value="${I}"> ${opt}</label><br>
+
+          `).join("")}
+
+          <p id="timer">⏱ Time left: ${timeLeft}s</p>
+
+          <button onclick="checkAnswer()">Submit</button>
+
+        </div>
+
+        <div id="progress-bar">
+
+          <div id="progress" style="width:${(current / questions.length) * 100}%"></div>
+
+        </div>
+
+      `;
+
+
+
+      timer = setInterval(() => {
+
+        timeLeft--;
+
+        const timerEl = document.getElementById("timer");
+
+        if (timerEl) timerEl.textContent =  timeLeft 
+
+        if (timeLeft === 0) {
+
+          clearInterval(timer);
+
+          autoSubmit();
+
+        }
+
+      }, 1000);
+
+    }
+
+
+
+    function autoSubmit() {
+
+      const result = document.getElementById("result");
+
+      result.innerText = "⏰ Time's up! Moving to next case.";
+
+      result.style.color = "gray";
+
+      current++;
+
+      setTimeout(nextQuestion, 1500);
+
+    }
+
+
+
+    function checkAnswer() {
+
+      clearInterval(timer);
+
+      const selected = document.querySelector('input[name="answer"]:checked');
+
+      const result = document.getElementById("result");
+
+
+
+      if (!selected) {
+
+        result.innerText = "Please select an answer!";
+
+        result.style.color = "black";
+
+        return;
+
+      }
+
+
+
+      const isCorrect = parseInt(selected.value) === questions[current].correct;
+
+      if (isCorrect) {
+
+        result.innerText = "✅ Correct! Well done, detective.";
+
+        result.style.color = "green";
+
+        score++;
+
+      } else {
+
+        result.innerText = "❌ Not quite. Review the email closely.";
+
+        result.style.color = "red";
+
+      }
+
+
+
+      current++;
+
+      setTimeout(nextQuestion, 1500);
+
+    }
+
+
+
+    function nextQuestion() {
+
+      if (current < questions.length) {
+
+        loadQuestion();
+
+      } else {
+
+        showSummary();
+
+      }
+
+    }
+
+
+
+    function showSummary() {
+
+      const container = document.getElementById("game");
+
+      let rank = "👀 Stay sharp!";
+
+      if (score === questions.length) rank = "🛡 Cyber Hero!";
+
+      else if (score === 2) rank = "🔐 Net Ninja!";
+
+      else if (score === 1) rank = "🧠 Internet Scout";
+
+
+
+      container.innerHTML = `
+
+        <h2>🎉 Mission Complete!</h2>
+
+        <p>You solved <strong>${score}</strong> out of <strong>${questions.length}</strong> cases.</p>
+
+        <p><strong>${rank}</strong></p>
+
+        <button onclick="restartGame()">🔁 Play Again</button>
+
+      `;
+
+    }
+
+
+
+    function restartGame() {
+
+      current = 0;
+
+      score = 0;
+
+      loadQuestion();
+
+    }
+
+
+
+    // Start the game on page load
+
+    loadQuestion();
+
+  </script>
+
+  <h5>Phishing Email Detective is an interactive game where players analyze suspicious emails to identify red flags. Test your cyber awareness by spotting phishing tricks, beating the timer, and boosting your score. Sharpen your skills to become a true digital detective!</h5>
+</body>
+
+</html>

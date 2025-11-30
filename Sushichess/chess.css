@@ -1,0 +1,10 @@
+#chessboard-container{
+ position: relative;
+ width: 640px;
+ height: 480px;
+}
+canvas, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

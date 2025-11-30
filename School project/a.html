@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Quiz</title>
+    <link rel="stylesheet" href="a.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form action="schoolproject.html"><button type="submit" class="btnover" >Home</button></form>
+    <div class="container">
+        <header>
+            <h1>Cybersecurity Awareness Quiz</h1>
+            <p>Test your knowledge of real-world cybersecurity scenarios</p>
+        </header>
+
+        <div class="quiz-container">
+            <div id="welcome-screen" class="quiz-screen active">
+                <h2>Welcome to the Cybersecurity Quiz</h2>
+                <p>This quiz will present you with real-life cybersecurity scenarios to test your awareness and knowledge.</p>
+                <div class="settings">
+                    <label for="difficulty">Select Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+
+                    <label for="question-count">Number of Questions:</label>
+                    <select id="question-count">
+                        <option value="3">3</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <button id="start-btn" class="btn">Start Quiz</button>
+            </div>
+
+            <div id="quiz-screen" class="quiz-screen">
+                <div class="quiz-header">
+                    <div class="question-count">Question <span id="current-question">1</span>/<span id="total-questions">5</span></div>
+                    <div class="timer">Time: <span id="time">30</span>s</div>
+                </div>
+                <div id="question" class="question"></div>
+                <div id="options" class="options"></div>
+                <div class="quiz-footer">
+                    <button id="next-btn" class="btn" disabled>Next Question</button>
+                </div>
+            </div>
+
+            <div id="result-screen" class="quiz-screen">
+                <h2>Quiz Completed!</h2>
+                <div class="score-container">
+                    Your Score: <span id="score">0</span>/<span id="max-score">0</span>
+                </div>
+                <div id="feedback" class="feedback"></div>
+                <button id="restart-btn" class="btn">Take Another Quiz</button>
+            </div>
+
+            <div id="loading-screen" class="quiz-screen">
+                <div class="loader"></div>
+                <p>Generating your cybersecurity quiz...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="a.js"></script>
+    <h5>The Cybersecurity Awareness Quiz challenges you with real-world scenarios to test your understanding of digital safety. Choose your difficulty, answer questions under time pressure, and sharpen your cyber skills while having fun. Perfect for anyone wanting to boost their online awareness!</h5>
+</body>
+</html>

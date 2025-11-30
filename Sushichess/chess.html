@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sushi Chess</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="chess.css" rel="stylesheet">
+    </head>
+    <body>
+    <h1>Sushi Chess Engine</h1>
+     <div id="chessboard-container">
+           <video id="video" width="640" height="480" autoplay style="position:absolute; top:0; left:0;"></video>
+           <canvas id="overlay" width="640" height="480" style="position:absolute; top:0; left:0;"></canvas>
+     </div>
+     
+     <button id="moveBtn">Move Played</button>
+     <span id="whiteTime">White Time: 5:00</span>
+     <span id="blackTime">Black Time: 5:00</span>
+     
+
+     <script type="module" src="model.js"></script>
+     <script type="module" src="chess.js"></script>
+    </body>
+</html>

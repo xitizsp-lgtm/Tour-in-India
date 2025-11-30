@@ -1,0 +1,116 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+
+}   
+body{
+    background-image: url(backgr1.jpg);
+    background-size: cover;
+
+}
+.hello{
+    margin-top: 20px;
+    color:rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 10px;
+    font-size: 100;
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: italic;
+    
+}
+
+.layerblur{
+    height: 0;
+    width:30rem;
+    position: absolute;
+    top:20%;
+    right:0;
+    box-shadow: 0 0 700px 15px white;
+    rotate: -30deg;
+    z-index:-1;
+}
+.robot3d{
+    position:absolute;
+    top:0;
+    right:-40%;
+}
+@media(max-width:1300px){
+    header{
+        padding: 1rem 0.5rem;
+    }
+    .main{
+        margin-top: 85%;
+        }
+    .robot3d{
+        scale:0.8;
+        top: -20%;
+        right:2%;
+
+    }  
+}
+@media(max-width:768px){
+    header{
+        padding: 1rem 0.1rem;
+    }
+    .main{
+        max-width: 30rem;
+        margin-left: 10%;
+        }
+    .robot3d{
+        scale:0.5;
+        top: -25%;
+        right:0;
+
+    }  
+}
+.inp{
+    border-radius: 10px;
+    
+}
+.p{color:rgb(255, 255, 255);   border-radius: 10px;}
+.h2{
+    top:40px;
+    text-align: center;
+    color:rgb(255, 255, 255);   border-radius: 10px;
+    background-color:rgb(245, 43, 43) ;
+}
+    
+.container{
+    align-items: center;
+    display:grid;
+    border-color: aliceblue;
+    grid-template-rows: repeat(2,200px);
+    grid-template-columns: repeat(4,300px);
+    row-gap: 5px;
+    column-gap: 10px;
+}
+.item1{
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+.item2{
+    grid-column: 3/2;
+    grid-row:1/2 ;
+}
+.item3{
+    grid-column: 3/2;
+    grid-row: 2/2;
+}
+.gridimage {
+  width: 100%;   /* Makes the image take up 100% of the parent's width */
+  height: 100%;  /* Makes the image take up 100% of the parent's height */
+  object-fit: cover; /* Controls how the image's content should fit its box */
+  border-radius: 50px;
+}
+.btnover{
+   border-radius: 10px;
+   background-color: black;
+   color: bisque;
+   font-size: 30;
+   z-index:-1; 
+}
+
+
+

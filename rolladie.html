@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dice Roller</title>
+    <style>
+      .dice {
+        font-size: 100px;
+        font-weight: 800;
+        position: fixed;
+        opacity: 0;
+      }
+      .dice:nth-child(1n) {
+        animation: rolling 1s linear 1s 1 alternate;
+      }
+      .dice:nth-child(2n) {
+        animation: rolling 1s linear 2s 1 alternate;
+      }
+      @keyframes rolling {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dice">⚀</div>
+    <div class="dice">⚁</div>
+    <button onclick="rollDice()">Roll Dice</button>
+    <script>
+      function rollDice() {
+        var dice1 = Math.floor(Math.random() * 6) + 1
+        var dice2 = Math.floor(Math.random() * 6) + 1
+        var diceDOM = document.querySelectorAll('.dice')
+        diceDOM[0].textContent = '⚀'
+        diceDOM[1].textContent = '⚁'
+        diceDOM[0].classList.add('animate')
+        diceDOM[1].classList.add('animate')
+        setTimeout(function () {
+          diceDOM[0].textContent = '⚀'
+          diceDOM[1].textContent = '⚁'
+          diceDOM[0].classList.remove('animate')
+          diceDOM[1].classList.remove('animate')
+        }, 2000)
+      }
+    </script>
+  </body>
+</html>

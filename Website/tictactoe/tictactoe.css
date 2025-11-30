@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #00ffdd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tictactoe {
+  padding: 20px;
+  background-color: #c5afee;
+  border-radius: 10px;
+}
+.tictactoe form input {
+  width: 60px;
+  height: 60px;
+  font-size: large;
+}
+.a {
+  margin: 20px 0;
+  float: left;
+}
+.b input {
+  height: 10px;
+  width: 30px;
+  display: flex;
+  margin: 5px;
+  float: left;
+  border-color: black;
+}
