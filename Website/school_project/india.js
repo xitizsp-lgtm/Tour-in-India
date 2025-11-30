@@ -6,9 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const client = new OpenAI({
-  apiKey: "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", // put your key here
-});
+const client = new OpenAI({});
 
 app.post("/travel", async (req, res) => {
   try {
