@@ -119,8 +119,6 @@ env/
 *.npz
 *.h5
 *.model
-svm_model.pkl
-scaler.pkl
 X_features.npy
 y_labels.npy
 
