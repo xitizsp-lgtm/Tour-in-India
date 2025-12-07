@@ -65,7 +65,13 @@ def extract_features_from_wav(file_path):
 @app.get("/")
 async def root():
     """Health check endpoint."""
-    return {"message": "Echoguard API is running"}
+    model_status = "loaded" if MODEL is not None else "not loaded"
+    return {
+        "message": "Echoguard API is running",
+        "model_status": model_status,
+        "model_path": MODEL_PATH,
+        "scaler_path": SCALER_PATH
+    }
 
 @app.post("/predict")
 async def predict(audio_file: UploadFile = File(...)):
@@ -73,7 +79,10 @@ async def predict(audio_file: UploadFile = File(...)):
     Predict if audio is REAL or FAKE.
     """
     if MODEL is None or SCALER is None:
-        raise HTTPException(status_code=500, detail="Model not loaded")
+        raise HTTPException(
+            status_code=503,
+            detail="Model not available. Please ensure svm_model.pkl and scaler.pkl are in the root directory."
+        )
     
     # Validate file extension
     file_ext = audio_file.filename.split('.')[-1].lower()
