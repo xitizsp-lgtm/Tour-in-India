@@ -119,8 +119,6 @@ env/
 *.npz
 *.h5
 *.model
-X_features.npy
-y_labels.npy
 
 # Audio files
 *.wav
