@@ -1,14 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "Echoguard/fastapi_app.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "Echoguard/fastapi_app.py"
-    }
-  ]
+  "buildCommand": "pip install -r requirements.txt",
+  "outputDirectory": "."
 }
