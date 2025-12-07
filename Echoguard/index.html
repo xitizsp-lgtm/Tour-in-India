@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deepfake Call Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ Deepfake Call Detector</h1>
+        <p>Upload a voice recording (.wav, .mp3, .flac) to check if it's a real human voice or a deepfake/synthetic recording.</p>
+
+        <form method="POST" action="/predict" enctype="multipart/form-data">
+            <input type="file" name="audio_file" accept=".wav, .mp3, .flac" required>
+            <button type="submit">Analyze Audio</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {{ result_class }}">
+                <h2>Analysis Result:</h2>
+                <p>{{ prediction }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

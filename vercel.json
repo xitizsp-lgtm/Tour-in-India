@@ -1,0 +1,9 @@
+{
+  "buildCommand": "pip install -r requirements.txt",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Echoguard/fastapi_app.py"
+    }
+  ]
+}
