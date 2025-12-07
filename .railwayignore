@@ -1,0 +1,39 @@
+# Ignore local development files
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv
+
+# Ignore test files
+test_audio.wav
+convert_to_wav.py
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore git
+.git/
+.gitignore
+
+# Keep the model files!
+# Make sure these are NOT ignored
+# svm_model.pkl
+# scaler.pkl
+

@@ -98,6 +98,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+venv/
 ENV/
 env/
 
@@ -112,20 +113,24 @@ env/
 *.sublime-workspace
 
 # Model and Data files
-*.pkl
-*.pickle
-*.joblib
+# *.pkl  # COMMENTED OUT - We need these files for deployment!
+# *.pickle
+# *.joblib
 *.npy
 *.npz
 *.h5
-*.model
+# *.model
 
-# Audio files
-*.wav
-*.mp3
-*.flac
-*.ogg
-*.m4a
+# IMPORTANT: Keep these model files for Railway deployment
+!svm_model.pkl
+!scaler.pkl
+
+# Audio files (for local testing - not needed in deployment)
+# *.wav  # Uncomment if you don't want to commit test audio files
+# *.mp3
+# *.flac
+# *.ogg
+# *.m4a
 
 # Large files
 *.zip

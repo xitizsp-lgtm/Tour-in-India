@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 import tempfile
 import wave
+import librosa
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 try:
@@ -38,27 +39,29 @@ except Exception as e:
 
 ALLOWED_EXT = {"wav"}
 
-def extract_features_from_wav(file_path):
-    """Extract basic audio features from WAV file."""
+def extract_features_from_wav(file_path, n_mfcc=13):
+    """Loads audio and extracts aggregated MFCC, Delta, and Delta-Delta features."""
     try:
-        with wave.open(file_path, 'rb') as wav_file:
-            n_frames = wav_file.getnframes()
-            frame_rate = wav_file.getframerate()
-            audio_data = wav_file.readframes(n_frames)
+        # Load audio at 16kHz sample rate (same as training)
+        y, sr = librosa.load(file_path, sr=16000, mono=True)
         
-        # Convert byte data to numpy array
-        audio_array = np.frombuffer(audio_data, dtype=np.int16)
+        # 1. MFCCs
+        mfccs = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=n_mfcc)
         
-        # Basic statistical features
-        features = np.array([
-            np.mean(audio_array),
-            np.std(audio_array),
-            np.min(audio_array),
-            np.max(audio_array),
-            np.median(audio_array),
-        ])
+        # 2. Delta and Delta-Delta
+        mfccs_delta = librosa.feature.delta(mfccs)
+        mfccs_delta2 = librosa.feature.delta(mfccs, order=2)
         
-        return features
+        # Combine all features
+        combined_features = np.vstack([mfccs, mfccs_delta, mfccs_delta2])
+        
+        # Aggregate: Calculate Mean and Standard Deviation (3 * 13 * 2 = 78 features)
+        mean_features = np.mean(combined_features, axis=1)
+        std_features = np.std(combined_features, axis=1)
+        
+        final_vector = np.hstack([mean_features, std_features])
+        
+        return final_vector
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing audio: {str(e)}")
 
